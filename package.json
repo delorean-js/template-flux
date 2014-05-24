@@ -1,0 +1,29 @@
+{
+  "description": " ",
+  "repository": "git",
+  "scripts": {
+    "postinstall": "jake generate project=main",
+    "build:dev": "webpack --debug --devtool inline-source-map",
+    "build:prod": "webpack -p",
+    "watch:dev": "webpack --debug --devtool inline-source-map --watch --cache"
+  },
+  "dependencies": {
+    "webpack": "^1.2.0",
+    "autoprefixer-loader": "^0.1.1",
+    "css-loader": "^0.6.12",
+    "file-loader": "^0.5.1",
+    "jsx-loader": "^0.10.2",
+    "less-loader": "^0.7.4",
+    "style-loader": "^0.6.3",
+    "url-loader": "^0.5.5",
+    "bootstrap": "https://github.com/twbs/bootstrap/archive/v3.1.1.tar.gz",
+    "page": "^1.3.7",
+    "react": "^0.10.0",
+    "rx": "^2.2.24"
+  },
+  "devDependencies": {
+    "karma-chai-plugins": "^0.2.1",
+    "karma-detect-browsers": "^0.1.2",
+    "karma-mocha": "^0.1.3"
+  }
+}
