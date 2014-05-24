@@ -40,6 +40,5 @@ var router = module.exports = {
 };
 
 function stripPushState() {
-  window.page = page;
-  history.pushState = history.pushState = function() {};
+  history.pushState = history.replaceState = function() {};
 }
