@@ -40,15 +40,15 @@ function relativeToProject(relativePath) {
 
 function entries() {
   return fs
-  .readdirSync(paths.source)
-  .filter(function(fileOrDir) {
-    if(fileOrDir !== 'shared') {
-      return fs.statSync(path.join(paths.source, fileOrDir)).isDirectory();
-    }
-    return false;
-  })
-  .reduce(function(obj, project) {
-    obj[project] = project;
-    return obj;
-  }, {});
+    .readdirSync(paths.source)
+    .filter(function(fileOrDir) {
+      if(fileOrDir !== 'shared') {
+        return fs.statSync(path.join(paths.source, fileOrDir)).isDirectory();
+      }
+      return false;
+    })
+    .reduce(function(obj, project) {
+      obj[project] = project;
+      return obj;
+    }, {});
 }
