@@ -8,7 +8,6 @@
     "watch:dev": "webpack --debug --devtool inline-source-map --watch --cache"
   },
   "dependencies": {
-    "webpack": "^1.2.0",
     "autoprefixer-loader": "^0.1.1",
     "css-loader": "^0.6.12",
     "file-loader": "^0.5.1",
