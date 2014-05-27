@@ -1,3 +1,5 @@
 'use strict';
 
-module.exports = require('delorean-flux').config({basePath: __dirname});
+module.exports = require('delorean-flux').webpack({
+  basePath: __dirname
+});
