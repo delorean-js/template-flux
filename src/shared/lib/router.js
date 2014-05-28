@@ -3,6 +3,7 @@
 var page = require('page');
 var fileProtocol = location.protocol === 'file:';
 var helpers = {};
+var pushState = true;
 var slice = Array.prototype.slice;
 
 var router = module.exports = {
@@ -31,8 +32,8 @@ var router = module.exports = {
     return path;
   },
   start: function() {
-    page.start({dispatch: !fileProtocol});
-    if(fileProtocol) {
+    page.start({dispatch: pushState && !fileProtocol});
+    if(!pushState || fileProtocol) {
       stripPushState();
       page.show('/');
     }
