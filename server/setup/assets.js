@@ -4,6 +4,7 @@ var config = require('../../webpack.config');
 var express = require('express');
 var path = require('path');
 
+var pushState = true;
 var rootPath = path.join(__dirname, '../..');
 var projects = process.env.project || Object.keys(config.entry);
 var singleProject = projects.length === 1;
@@ -18,18 +19,20 @@ module.exports = function(app) {
 
   app.use(express.static(basePath));
 
-  if(singleProject) {
-    indexFile = path.join(basePath, 'index.html');
-    app.get('*', function(request, response) {
-      response.sendfile(indexFile);
-    });
-  }
-  else {
-    projects.forEach(function(project) {
-      var indexFile = path.join(basePath, project, 'index.html');
-      app.get('/' + project + '/*', function(request, response) {
+  if(pushState) {
+    if(singleProject) {
+      indexFile = path.join(basePath, 'index.html');
+      app.get('*', function(request, response) {
         response.sendfile(indexFile);
       });
-    });
+    }
+    else {
+      projects.forEach(function(project) {
+        var indexFile = path.join(basePath, project, 'index.html');
+        app.get('/' + project + '/*', function(request, response) {
+          response.sendfile(indexFile);
+        });
+      });
+    }
   }
 };
