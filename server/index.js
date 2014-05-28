@@ -1,10 +1,6 @@
 'use strict';
 
-var compress = require('compression');
-var express = require('express');
-var setupAssets = require('./setup/assets');
-var app = module.exports = express();
+var app = require('./app');
+var http = require('http');
 
-// Add middleware
-app.use(compress());
-setupAssets(app);
+module.exports = http.createServer(app);
