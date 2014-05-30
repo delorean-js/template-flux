@@ -16,12 +16,17 @@ if(typeof projects === 'string') {
 
 module.exports = function(app) {
   var indexFile;
+  var indexJs;
 
   app.use(express.static(basePath));
 
   if(pushState) {
     if(singleProject) {
       indexFile = path.join(basePath, 'index.html');
+      indexJs = path.join(basePath, 'index.js');
+      app.get('/' + projects[0] + '/index.js', function(request, response) {
+        response.sendfile(indexJs);
+      });
       app.get('*', function(request, response) {
         response.sendfile(indexFile);
       });
