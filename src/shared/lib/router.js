@@ -26,7 +26,7 @@ var router = module.exports = {
     }
 
     if(!~path.indexOf(':')) {
-      // TODO: Throw error
+      throw new Error('Invalid parameters for the "' + helper + '" helper');
     }
 
     return path;
