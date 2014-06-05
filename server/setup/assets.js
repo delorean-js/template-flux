@@ -6,20 +6,18 @@ var path = require('path');
 
 var pushState = true;
 var rootPath = path.join(__dirname, '../..');
-var projects = process.env.project || Object.keys(config.entry);
+var projects = process.env.project
+  ? process.env.project.split(',')
+  : Object.keys(config.entry);
 var singleProject = projects.length === 1;
 var basePath = path.join(rootPath, 'build', singleProject ? projects[0] : '');
-
-if(typeof projects === 'string') {
-  projects = projects.split(',');
-}
 
 module.exports = function(app) {
   var indexFile;
   var indexJs;
+  var rootPage;
 
   app.use(express.static(basePath));
-
   if(pushState) {
     if(singleProject) {
       indexFile = path.join(basePath, 'index.html');
@@ -32,6 +30,12 @@ module.exports = function(app) {
       });
     }
     else {
+      rootPage = projects.map(function(project) {
+        return '<div><a href="/' + project + '">' + project + '</a></div>';
+      }).join('');
+      app.get('/', function(request, response) {
+        response.send(rootPage);
+      });
       projects.forEach(function(project) {
         var indexFile = path.join(basePath, project, 'index.html');
         app.get('/' + project + '/*', function(request, response) {
